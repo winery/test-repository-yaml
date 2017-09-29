@@ -1,0 +1,29 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+node_types:
+  orange:
+    properties:
+      Antioxidants:
+        type: string
+        required: false
+        status: supported
+      HarvestedAt:
+        type: string
+        required: false
+        status: supported
+      Superfood:
+        type: boolean
+        required: false
+        status: supported
+      Potassium:
+        type: float
+        required: false
+        status: supported
+      VitaminC:
+        type: float
+        required: false
+        status: supported
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/nodetypes/fruits
+      abstract: no
+      final: no

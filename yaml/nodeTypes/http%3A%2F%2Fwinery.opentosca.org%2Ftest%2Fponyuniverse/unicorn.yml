@@ -1,0 +1,29 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+imports:
+  - CapWarmFloor.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapWarmFloor.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapFood.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapFood.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+node_types:
+  unicorn:
+    properties:
+      State:
+        type: string
+        required: false
+        status: supported
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/ponyuniverse
+      abstract: no
+      final: no
+    requirements:
+      - ReqWarmFloor:
+          capability: ponyuniverse:CapWarmFloor
+          occurrences: [ 1, unbounded ]
+      - ReqFood:
+          capability: ponyuniverse:CapFood
+          occurrences: [ 1, unbounded ]

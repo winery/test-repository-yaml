@@ -1,0 +1,39 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://www.opentosca.org/providers/StallProvider
+imports:
+  - straw.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/straw.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapCanHostStraw.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapCanHostStraw.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - stall.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/stall.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - hostedOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/hostedOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    stall:
+      type: ponyuniverse:stall
+      capabilities:
+        CapCanHostStraw:
+    straw:
+      type: ponyuniverse:straw
+      requirements:
+        - ReqCanHostStraw:
+            capability: ponyuniverse:CapCanHostStraw
+        - con_19:
+            node: stall
+      capabilities:
+        CapWarmFloor:
+  relationship_templates:
+    con_19:
+      type: ponyuniverse:hostedOn

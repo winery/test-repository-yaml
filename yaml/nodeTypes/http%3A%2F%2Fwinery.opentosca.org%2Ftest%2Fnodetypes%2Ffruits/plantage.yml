@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+node_types:
+  plantage:
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/nodetypes/fruits
+      abstract: no
+      final: no

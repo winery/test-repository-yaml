@@ -1,0 +1,39 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://www.opentosca.org/providers/FoodProvider
+imports:
+  - oat.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/oat.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapCanHostOat.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapCanHostOat.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - trough.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/trough.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - hostedOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/hostedOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    oat:
+      type: ponyuniverse:oat
+      requirements:
+        - ReqCanHostOat:
+            capability: ponyuniverse:CapCanHostOat
+        - con_19:
+            node: trough
+      capabilities:
+        CapDryFood:
+    trough:
+      type: ponyuniverse:trough
+      capabilities:
+        CapCanHostOat:
+  relationship_templates:
+    con_19:
+      type: ponyuniverse:hostedOn

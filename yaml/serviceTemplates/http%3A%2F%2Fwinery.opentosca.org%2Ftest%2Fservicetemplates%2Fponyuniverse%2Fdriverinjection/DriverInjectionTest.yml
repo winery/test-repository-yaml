@@ -1,0 +1,54 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/ponyuniverse/driverinjection
+imports:
+  - shetland_pony.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/shetland_pony.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - straw.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/straw.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - ponycompetition.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/ponycompetition.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapEquipment.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapEquipment.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - standsOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/standsOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - attendTo.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/attendTo.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    shetland_pony:
+      type: ponyuniverse:shetland_pony
+      requirements:
+        - con_47:
+            node: ponycompetition
+        - con_25:
+            node: straw
+    ponycompetition:
+      type: ponyuniverse:ponycompetition
+      requirements:
+        - ReqEquipment:
+            capability: ponyuniverse:CapEquipment
+      capabilities:
+        CapCompetition:
+    straw:
+      type: ponyuniverse:straw
+  relationship_templates:
+    con_47:
+      type: ponyuniverse:attendTo
+      properties:
+        Driver: ""
+    con_25:
+      type: ponyuniverse:standsOn

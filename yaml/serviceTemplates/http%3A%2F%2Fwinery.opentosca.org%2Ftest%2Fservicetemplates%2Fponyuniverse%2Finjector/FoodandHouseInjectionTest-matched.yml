@@ -1,0 +1,80 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/ponyuniverse/injector
+imports:
+  - shetland_pony.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/shetland_pony.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapWarmFloor.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapWarmFloor.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapDryFood.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapDryFood.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - pasture.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/pasture.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - oat.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/oat.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - CapCanHostOat.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapCanHostOat.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - trough.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/trough.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - standsOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/standsOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - hostedOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/hostedOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - connectsTo.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/connectsTo.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    shetland_pony:
+      type: ponyuniverse:shetland_pony
+      requirements:
+        - ReqWarmFloor:
+            capability: ponyuniverse:CapWarmFloor
+        - ReqDryFood:
+            capability: ponyuniverse:CapDryFood
+        - con_100:
+            node: pasture
+    oat:
+      type: ponyuniverse:oat
+      requirements:
+        - ReqCanHostOat:
+            capability: ponyuniverse:CapCanHostOat
+        - con_19:
+            node: trough
+      capabilities:
+        CapDryFood:
+    trough:
+      type: ponyuniverse:trough
+      capabilities:
+        CapCanHostOat:
+    pasture:
+      type: ponyuniverse:pasture
+      capabilities:
+        CapWarmFloor:
+  relationship_templates:
+    con_100:
+      type: ponyuniverse:standsOn
+    con_101:
+      type: ponyuniverse:connectsTo
+    con_19:
+      type: ponyuniverse:hostedOn

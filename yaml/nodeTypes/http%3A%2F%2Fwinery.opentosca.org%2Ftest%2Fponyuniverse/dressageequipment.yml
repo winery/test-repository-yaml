@@ -1,0 +1,17 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+imports:
+  - CapEquipment.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/CapEquipment.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+node_types:
+  dressageequipment:
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/ponyuniverse
+      abstract: no
+      final: no
+    capabilities:
+      CapEquipment:
+        occurrences: [ 1, unbounded ]
+        type: ponyuniverse:CapEquipment

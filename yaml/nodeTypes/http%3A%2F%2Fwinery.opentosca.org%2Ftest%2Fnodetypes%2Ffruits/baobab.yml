@@ -1,0 +1,61 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+imports:
+  - Healthy.yml:
+      file: capabilityTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fcapabilitytypes%2Ffruits/Healthy.yml
+      namespace_uri: http://winery.opentosca.org/test/capabilitytypes/fruits
+      namespace_prefix: fruits2
+node_types:
+  baobab:
+    properties:
+      Antioxidants:
+        type: string
+        required: false
+        status: supported
+      HarvestedAt:
+        type: string
+        required: false
+        status: supported
+      Superfood:
+        type: boolean
+        required: false
+        status: supported
+      Potassium:
+        type: float
+        required: false
+        status: supported
+      VitaminC:
+        type: float
+        required: false
+        status: supported
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/nodetypes/fruits
+      abstract: no
+      final: no
+    capabilities:
+      ImportConstraintsHealthy:
+        occurrences: [ 1, 1 ]
+        type: fruits2:Healthy
+    interfaces:
+      bananaInterface:
+        peel:
+          inputs:
+            peeler:
+              type: string
+              required: true
+              status: supported
+            bananaInShell:
+              type: string
+              required: true
+              status: supported
+          outputs:
+            peeledBanana:
+              type: string
+              required: false
+              status: supported
+        eat:
+          inputs:
+            mouth:
+              type: string
+              required: true
+              status: supported

@@ -1,0 +1,36 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/fruits
+imports:
+  - baobab.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/baobab.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - unicorn.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/unicorn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - eat.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/eat.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    baobab:
+      type: fruits:baobab
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+    unicorn:
+      type: ponyuniverse:unicorn
+      requirements:
+        - con_27:
+            node: baobab
+  relationship_templates:
+    con_27:
+      type: ponyuniverse:eat
+  substitution_mappings:

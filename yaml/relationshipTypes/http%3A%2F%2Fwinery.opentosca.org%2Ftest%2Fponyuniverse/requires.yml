@@ -1,0 +1,14 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+imports:
+  - hostedOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/hostedOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+relationship_types:
+  requires:
+    derived_from: ponyuniverse:hostedOn
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/ponyuniverse
+      abstract: no
+      final: no

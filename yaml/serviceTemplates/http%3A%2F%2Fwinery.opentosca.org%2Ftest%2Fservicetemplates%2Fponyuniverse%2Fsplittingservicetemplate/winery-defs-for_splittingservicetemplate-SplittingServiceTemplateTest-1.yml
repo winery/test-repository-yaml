@@ -1,0 +1,93 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/ponyuniverse/splittingservicetemplate
+imports:
+  - ponycompetition.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/ponycompetition.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - shetland_pony.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/shetland_pony.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - straw.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/straw.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - stall.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/stall.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - standsOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/standsOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - connectsTo.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/connectsTo.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    shetland_pony:
+      type: ponyuniverse:shetland_pony
+      properties:
+        State: ""
+      requirements:
+        - con_208:
+            node: straw
+        - con_59:
+            node: ponycompetition_2
+        - con_47:
+            node: ponycompetition
+    ponycompetition:
+      type: ponyuniverse:ponycompetition
+      properties:
+        State: ""
+      requirements:
+        - con_220:
+            node: straw
+    straw_2:
+      type: ponyuniverse:straw
+      properties:
+        State: "running"
+      requirements:
+        - con_160:
+            node: stall_2
+    stall:
+      type: ponyuniverse:stall
+      properties:
+        State: ""
+    stall_2:
+      type: ponyuniverse:stall
+      properties:
+        State: "running"
+    ponycompetition_2:
+      type: ponyuniverse:ponycompetition
+      properties:
+        State: "running"
+      requirements:
+        - con_172:
+            node: straw_2
+    straw:
+      type: ponyuniverse:straw
+      properties:
+        State: ""
+      requirements:
+        - con_139:
+            node: stall
+  relationship_templates:
+    con_208:
+      type: ponyuniverse:standsOn
+    con_160:
+      type: ponyuniverse:standsOn
+    con_172:
+      type: ponyuniverse:standsOn
+    con_139:
+      type: ponyuniverse:standsOn
+    con_59:
+      type: ponyuniverse:connectsTo
+    con_47:
+      type: ponyuniverse:connectsTo
+    con_220:
+      type: ponyuniverse:standsOn

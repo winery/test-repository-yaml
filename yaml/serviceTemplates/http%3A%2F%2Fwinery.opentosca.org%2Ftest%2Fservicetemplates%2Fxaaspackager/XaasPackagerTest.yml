@@ -1,0 +1,28 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/xaaspackager
+imports:
+  - baobab.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/baobab.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - XaasPackagerArtifact.yml:
+      file: artifactTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fartifacttypes%2Fxaaspackager/XaasPackagerArtifact.yml
+      namespace_uri: http://winery.opentosca.org/test/artifacttypes/xaaspackager
+      namespace_prefix: xaaspackager1
+topology_template:
+  node_templates:
+    baobab:
+      type: fruits:baobab
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      artifacts:
+        XaasPackacker_DA:
+          type: xaaspackager1:XaasPackagerArtifact
+          file: artifactTemplates/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fartifacttemplates%2Fxaaspackager/XaasPackager_DA/XaasPackager.zip
+          files: [ artifactTemplates/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fartifacttemplates%2Fxaaspackager/XaasPackager_DA/XaasPackager.zip ]

@@ -1,0 +1,109 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/fruits
+imports:
+  - plantage.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/plantage.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - tree.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/tree.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - baobab.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/baobab.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - orange.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fnodetypes%2Ffruits/orange.yml
+      namespace_uri: http://winery.opentosca.org/test/nodetypes/fruits
+      namespace_prefix: fruits
+  - hostedOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Frelationshiptypes%2Ffruits/hostedOn.yml
+      namespace_uri: http://winery.opentosca.org/test/relationshiptypes/fruits
+      namespace_prefix: fruitsrty
+topology_template:
+  node_templates:
+    orange:
+      type: fruits:orange
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      requirements:
+        - con_59:
+            node: tree_2
+    baobab:
+      type: fruits:baobab
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      requirements:
+        - con_23:
+            node: tree
+    tree:
+      type: fruits:tree
+      requirements:
+        - con_97:
+            node: plantage
+    tree_2:
+      type: fruits:tree
+      requirements:
+        - con_85:
+            node: plantage
+    baobab_2:
+      type: fruits:baobab
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      requirements:
+        - con_35:
+            node: tree
+    baobab_3:
+      type: fruits:baobab
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      requirements:
+        - con_47:
+            node: tree
+    plantage:
+      type: fruits:plantage
+    orange_2:
+      type: fruits:orange
+      properties:
+        Antioxidants: ""
+        HarvestedAt: ""
+        Superfood: ""
+        Potassium: ""
+        VitaminC: ""
+      requirements:
+        - con_71:
+            node: tree_2
+  relationship_templates:
+    con_35:
+      type: fruitsrty:hostedOn
+    con_23:
+      type: fruitsrty:hostedOn
+    con_97:
+      type: fruitsrty:hostedOn
+    con_85:
+      type: fruitsrty:hostedOn
+    con_71:
+      type: fruitsrty:hostedOn
+    con_59:
+      type: fruitsrty:hostedOn
+    con_47:
+      type: fruitsrty:hostedOn

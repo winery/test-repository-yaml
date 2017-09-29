@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+relationship_types:
+  connectsTo:
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/ponyuniverse
+      abstract: no
+      final: no

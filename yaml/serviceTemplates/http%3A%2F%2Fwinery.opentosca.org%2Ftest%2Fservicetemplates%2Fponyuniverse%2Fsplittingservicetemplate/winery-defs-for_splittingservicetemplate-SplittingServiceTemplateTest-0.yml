@@ -1,0 +1,63 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/ponyuniverse/splittingservicetemplate
+imports:
+  - ponycompetition.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/ponycompetition.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - straw.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/straw.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - stall.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/stall.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - standsOn.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/standsOn.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - connectsTo.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/connectsTo.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    straw_2:
+      type: ponyuniverse:straw
+      properties:
+        State: ""
+      requirements:
+        - con_160:
+            node: stall_2
+    stall_2:
+      type: ponyuniverse:stall
+      properties:
+        State: ""
+    ponycompetition_2:
+      type: ponyuniverse:ponycompetition
+      properties:
+        State: ""
+      requirements:
+        - con_172:
+            node: straw_2
+        - con_83:
+            node: ponycompetition_3
+    ponycompetition_3:
+      type: ponyuniverse:ponycompetition
+      properties:
+        State: ""
+      requirements:
+        - con_184:
+            node: straw_2
+  relationship_templates:
+    con_160:
+      type: ponyuniverse:standsOn
+    con_172:
+      type: ponyuniverse:standsOn
+    con_83:
+      type: ponyuniverse:connectsTo
+    con_184:
+      type: ponyuniverse:standsOn

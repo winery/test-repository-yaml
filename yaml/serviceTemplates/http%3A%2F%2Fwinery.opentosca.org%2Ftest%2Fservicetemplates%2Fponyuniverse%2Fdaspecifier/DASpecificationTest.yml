@@ -1,0 +1,65 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+metadata:
+  targetNamespace: http://winery.opentosca.org/test/servicetemplates/ponyuniverse/daspecifier
+imports:
+  - shetland_pony.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/shetland_pony.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - dressageequipment.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/dressageequipment.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - westernequipment.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/westernequipment.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - ponycompetition.yml:
+      file: nodeTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/ponycompetition.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - requires.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/requires.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+  - attendTo.yml:
+      file: relationshipTypes/http%3A%2F%2Fwinery.opentosca.org%2Ftest%2Fponyuniverse/attendTo.yml
+      namespace_uri: http://winery.opentosca.org/test/ponyuniverse
+      namespace_prefix: ponyuniverse
+topology_template:
+  node_templates:
+    shetland_pony:
+      type: ponyuniverse:shetland_pony
+      requirements:
+        - con_71:
+            node: ponycompetition
+        - con_59:
+            node: ponycompetition_2
+    dressageequipment:
+      type: ponyuniverse:dressageequipment
+    ponycompetition:
+      type: ponyuniverse:ponycompetition
+      requirements:
+        - con_78:
+            node: dressageequipment
+    ponycompetition_2:
+      type: ponyuniverse:ponycompetition
+      requirements:
+        - con_66:
+            node: westernequipment
+    westernequipment:
+      type: ponyuniverse:westernequipment
+  relationship_templates:
+    con_78:
+      type: ponyuniverse:requires
+    con_66:
+      type: ponyuniverse:requires
+    con_71:
+      type: ponyuniverse:attendTo
+      properties:
+        Driver: ""
+    con_59:
+      type: ponyuniverse:attendTo
+      properties:
+        Driver: ""

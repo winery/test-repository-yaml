@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+capability_types:
+  Endpoint:
+    metadata:
+      targetNamespace: http://docs.oasis-open.org/tosca/ns/2011/12
+      abstract: no
+      final: no

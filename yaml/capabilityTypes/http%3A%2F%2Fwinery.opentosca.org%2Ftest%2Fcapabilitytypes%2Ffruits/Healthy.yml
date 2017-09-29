@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_1
+
+capability_types:
+  Healthy:
+    metadata:
+      targetNamespace: http://winery.opentosca.org/test/capabilitytypes/fruits
+      abstract: no
+      final: no
